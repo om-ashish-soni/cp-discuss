@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoOperations;
-import org.springframework.http.HttpRequest;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,11 +17,9 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
 public class LoginController {
-
+    
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private MongoOperations mongoOperations;
 
     @PostMapping("/login")
     //get request demo
@@ -40,9 +38,13 @@ public class LoginController {
     public List<String> doABC(HttpServletRequest req){
         List<String> lst=new ArrayList<>();
         lst.add("abc");
-        User user = new User("om","123");
-        mongoOperations.save(user);
+        User user = new User("om3","12345");
+        userRepository.save(user);
         System.out.println(req.getParameter("first"));
         return lst;
+    }
+    @GetMapping("/getuser")
+    public List<User> getUser(HttpServletRequest req){
+        return userRepository.findAll();
     }
 }
