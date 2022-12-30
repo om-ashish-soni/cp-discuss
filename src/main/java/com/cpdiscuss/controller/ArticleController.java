@@ -32,6 +32,7 @@ public class ArticleController{
         map.put("articles", articleRepository.findAll());
         return map;
     }
+    
 
     @PostMapping("/articles/create")
     public Map<String,Object> createArticle(@RequestBody Article article) {
