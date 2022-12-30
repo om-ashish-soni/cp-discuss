@@ -1,5 +1,7 @@
 package com.cpdiscuss.model;
 
+import java.util.Date;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
   
@@ -8,23 +10,30 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class User {
     @Id
     private String userId;
-    private String name;
+    private String userName;
     private String email;
     private String password;
+    private Date birthDate;
+
       
-    public User(String email, String password) {
+    public User(String userName,String email, String password,Date birthDate) {
         super();
-        this.email=email;
+        this.userName = userName;
+        this.email = email;
+        this.birthDate=birthDate;
         this.password=password;
     }
     public String getUserId() {
         return userId;
     }
-    public String getName() {
-        return name;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
-    public void setName(String name) {
-        this.name = name;
+    public String getUserName() {
+        return userName;
+    }
+    public void setUserName(String name) {
+        this.userName = name;
     }
     public String getEmail() {
         return email;
@@ -34,5 +43,14 @@ public class User {
     }
     public String getPassword() {
         return password;
+    }
+    public void setPassword(String password) {
+        this.password=password;
+    }
+    public Date getBirthDate() {
+        return birthDate;
+    }
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
 }
