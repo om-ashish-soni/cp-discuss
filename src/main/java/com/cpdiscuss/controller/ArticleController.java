@@ -32,11 +32,13 @@ public class ArticleController{
         map.put("articles", articleRepository.findAll());
         return map;
     }
-    
+
 
     @PostMapping("/articles/create")
     public Map<String,Object> createArticle(@RequestBody Article article) {
         String articleName=article.getName();
+        articleName=articleName.replace(' ','-');
+        article.setName(articleName);
         Article existingArticle=getArticle(articleName);
         Map<String,Object> response=new HashMap<>();
         if(existingArticle!=null) {
@@ -52,7 +54,6 @@ public class ArticleController{
 
     @GetMapping("/articles/get/{articleName}")
     public Article getArticle(@PathVariable String articleName){
-        
         return articleRepository.findByName(articleName);
     }
 }
