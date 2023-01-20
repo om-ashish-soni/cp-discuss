@@ -2,8 +2,10 @@ package com.cpdiscuss.model;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -19,7 +21,7 @@ public class Article {
     private String creatorName;
     private Date createdAt;
     private Date updatedAt;
-    private List<String> tags;
+    private Set<String> tags;
     private Long views;
     private Long likes;
     public String difficultyType;
@@ -35,6 +37,7 @@ public class Article {
         this.likes=0L;
         this.difficultyType="easy";
         this.difficultyTypeMap=new HashMap<String,Integer>();
+        this.tags=new HashSet<>();
         for(String difficultyType:difficultyList){
             this.difficultyTypeMap.put(difficultyType,0);
         }
@@ -72,11 +75,20 @@ public class Article {
     public String getContent(){
         return this.content;
     }
-    public List<String> getTags(){
+    public Set<String> getTags(){
         return this.tags;
     }
     public void setTags(List<String> tags){
-        this.tags=tags;
+        this.tags.clear();
+        addTags(tags);
+    }
+    public void addTag(String tag){
+        this.tags.add(tag);
+    }
+    public void addTags(List<String> tags){
+        for(String tag:tags){
+            this.tags.add(tag);
+        }
     }
     public void setContent(String content){
         this.content=content;

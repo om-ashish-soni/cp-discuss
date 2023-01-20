@@ -1,6 +1,7 @@
 package com.cpdiscuss.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.bson.types.ObjectId;
@@ -85,6 +86,16 @@ public class ArticleController{
         response.put("difficultyType",(Object)article.getDifficultyType());
         return response;
     }
+
+    @GetMapping("/articles/get/tag/{tagName}")
+    public Map<String,Object> getArticlesByTag(@PathVariable String tagName){
+        List<Article> articles=articleRepository.findByTag(tagName);
+        
+        Map<String,Object> response=new HashMap<>();
+        response.put("articles",(Object)articles);
+        return response;
+    }
+
     // @GetMapping("/articles/delete/{articleName}")
     // public Map<String,Object> deleteArticle(@PathVariable String articleName) {
     //     Map<String,Object> response=new HashMap<>();
