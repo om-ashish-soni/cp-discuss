@@ -26,6 +26,7 @@ public class LoginController {
     @Autowired
     private UserRepository userRepository;
 
+    
     @PostMapping("/register")
     public Map<String,Object> addUser(@RequestBody User user){
         String username=user.getUserName();
