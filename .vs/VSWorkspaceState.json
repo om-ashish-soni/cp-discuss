@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\target",
+    "\\target\\classes",
+    "\\target\\classes\\com",
+    "\\target\\classes\\com\\cpdiscuss",
+    "\\target\\classes\\com\\cpdiscuss\\controller",
+    "\\target\\classes\\com\\cpdiscuss\\database",
+    "\\target\\test-classes",
+    "\\target\\test-classes\\com",
+    "\\target\\test-classes\\com\\cpdiscuss"
+  ],
+  "SelectedNode": "\\target\\classes\\com\\cpdiscuss\\controller\\LoginController.class",
+  "PreviewInSolutionExplorer": false
+}

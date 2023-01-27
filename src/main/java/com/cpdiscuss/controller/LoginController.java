@@ -1,11 +1,13 @@
 package com.cpdiscuss.controller;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,25 +20,31 @@ import com.cpdiscuss.repository.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class LoginController {
     
     @Autowired
     private UserRepository userRepository;
 
     @PostMapping("/register")
-    public void addUser(@RequestBody User user){
+    public Map<String,Object> addUser(@RequestBody User user){
         String username=user.getUserName();
-        User alreadyExist=userRepository.findByUserName(username);
-        if(alreadyExist!=null){
+        User alreadyExistingUser=userRepository.findByUserName(username);
+        Map<String,Object> response=new HashMap<String,Object>();
+        if(alreadyExistingUser!=null){
             System.out.println("User already exist");
-            return; 
+            response.put("error", "User already exist");
+            return response; 
         }
         userRepository.save(user);
+        response.put("user",(Object)user);
+        return response;
     }
     @PostMapping("/login")
-    public User loginUser(@RequestBody Map<String,String> map){
-        String username=map.get("userName");
+    public User loginUser(@RequestBody Map<String,Object> map){
+        String username=(String)map.get("userName");
         User user=userRepository.findByUserName(username);
+        // System.out.println("++++++++++++ : "+user.toString());
         if(user==null ||!user.getPassword().equals(map.get("password"))) {
             System.out.println("User not found");
             return null;
