@@ -42,15 +42,17 @@ public class LoginController {
         return response;
     }
     @PostMapping("/login")
-    public User loginUser(@RequestBody Map<String,Object> map){
+    public Map<String,Object> loginUser(@RequestBody Map<String,Object> map){
         String username=(String)map.get("userName");
         User user=userRepository.findByUserName(username);
-        // System.out.println("++++++++++++ : "+user.toString());
+        Map<String,Object> response=new HashMap<String,Object>();
         if(user==null ||!user.getPassword().equals(map.get("password"))) {
             System.out.println("User not found");
-            return null;
+            response.put("error","User not found");
+            return response;
         }
-        return user;
+        response.put("user",user);
+        return response;
     }
     //get request demo
     @RequestMapping("/")

@@ -15,4 +15,10 @@ public interface ArticleRepository extends MongoRepository<Article,String>{
     @Query("{'tags':{$in:[?0]}}")
     List<Article> findByTag(String tagName);
     
+    @Query("{'name': {$regex : ?0, $options: 'i'}}")
+    List<Article> findArticlesByRegex(String searchText);
+
+    @Query("{'creatorName':?0}")
+    List<Article> findByCreatorName(String creatorName);
+    
 }

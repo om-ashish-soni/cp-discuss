@@ -18,7 +18,9 @@ public class Article {
     private String articleId;
     private String name;
     private String content;
+    private String summary;
     private String creatorName;
+    private String creatorId;
     private Date createdAt;
     private Date updatedAt;
     private Set<String> tags;
@@ -57,6 +59,12 @@ public class Article {
     public Article(){
         this.init();
     }
+    public String getSummary(){
+        return this.summary;
+    }
+    public void setSummary(String summary){
+        this.summary=summary;
+    }
     public Long getViews(){
         return this.views;
     }
@@ -68,6 +76,16 @@ public class Article {
     }
     public void setLikes(Long likes){
         this.likes=likes;
+    }
+    public String getCreatorId(){
+        return this.creatorId;
+    }
+    public void setCreatorId(String id){
+        this.creatorId=id;
+        
+    }
+    public void setCreatorName(String creatorName){
+        this.creatorName=creatorName;
     }
     public String getName(){
         return this.name;
