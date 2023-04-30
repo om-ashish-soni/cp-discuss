@@ -1,5 +1,6 @@
 package com.cpdiscuss.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -31,19 +32,19 @@ public class Article {
         "easy","medium","hard","normal","expert"
     };
     private Map<String,Integer> difficultyTypeMap;
-    
+    private List<Comment> comments;
     private void init(){
         this.createdAt=new Date();
         this.updatedAt=new Date();
         this.views=0L;
         this.likes=0L;
+        this.comments=new ArrayList<Comment>();
         this.difficultyType="easy";
         this.difficultyTypeMap=new HashMap<String,Integer>();
         this.tags=new HashSet<>();
         for(String difficultyType:difficultyList){
             this.difficultyTypeMap.put(difficultyType,0);
         }
-        
     }
     public Article(String name,String content) {
         this.name=name;
@@ -58,6 +59,12 @@ public class Article {
     }
     public Article(){
         this.init();
+    }
+    public List<Comment> getComments(){
+        return this.comments;
+    }
+    public void addComment(Comment comment){
+        this.comments.add(comment);
     }
     public String getSummary(){
         return this.summary;

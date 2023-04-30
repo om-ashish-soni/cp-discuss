@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cpdiscuss.model.Article;
+import com.cpdiscuss.model.Comment;
 import com.cpdiscuss.repository.ArticleRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -123,6 +124,13 @@ public class ArticleController {
         return response;
     }
 
+    // @PostMapping("/articles/comment/{articleName}")
+    public Article commentArticle(String articleName,Comment comment) {
+        Article article=articleRepository.findByName(articleName);
+        article.addComment(comment);
+        articleRepository.save(article);
+        return article;
+    }
     // @GetMapping("/articles/delete/{articleName}")
     // public Map<String,Object> deleteArticle(@PathVariable String articleName) {
     // Map<String,Object> response=new HashMap<>();
